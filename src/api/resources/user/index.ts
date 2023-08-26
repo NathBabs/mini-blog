@@ -4,6 +4,7 @@ import {
   retrieveUsersController,
   createUserPostController,
   retrieveUserPostsController,
+  retrieveTopUsersWithCommentsController,
 } from './user.controller';
 import validate from '../../middlewares/validateRequest';
 import { createUserSchema, createUserPostSchema } from './user.schema';
@@ -21,6 +22,8 @@ const user = ({ router, path = '/users' }: RouteOptions) => {
   // posts
   router.post(`${path}/:id/posts`, auth, validate(createUserPostSchema), createUserPostController);
   router.get(`${path}/:id/posts`, auth, retrieveUserPostsController);
+
+  router.get(`${path}/top`, retrieveTopUsersWithCommentsController);
 };
 
 export default user;

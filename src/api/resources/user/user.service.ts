@@ -5,6 +5,7 @@ import {
   createUserEntry,
   findUserByEmail,
   findAllUserPosts,
+  findTopUsersWithMostPosts,
 } from './user.repository';
 import { CreateUserInput } from './user.schema';
 import bcrypt from 'bcrypt';
@@ -144,5 +145,14 @@ export async function retrieveUserPosts(userId: string): Promise<RetrievePostRes
   return Promise.resolve({
     statusCode: StatusCode.OK,
     data: posts,
+  });
+}
+
+export async function retrieveTopUsersWithComments(): Promise<any> {
+  const topUsers = await findTopUsersWithMostPosts();
+
+  return Promise.resolve({
+    statusCode: StatusCode.OK,
+    data: topUsers,
   });
 }
