@@ -1,5 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
-import { createUser, createUserPost, retrieveUserPosts, retrieveUser } from './user.service';
+import {
+  createUser,
+  createUserPost,
+  retrieveUserPosts,
+  retrieveUser,
+  retrieveTopUsersWithComments,
+} from './user.service';
 import { CreateUserPostInput } from './user.schema';
 
 export async function createUserController(req: Request, res: Response, next: NextFunction) {
@@ -48,6 +54,21 @@ export async function retrieveUserPostsController(req: Request, res: Response, n
   const { id: userId } = req.user;
 
   retrieveUserPosts(userId)
+    .then((dataObj) => {
+      res.status(dataObj.statusCode).json({
+        status: true,
+        data: dataObj.data,
+      });
+    })
+    .catch((err) => next(err));
+}
+
+export async function retrieveTopUsersWithCommentsController(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  retrieveTopUsersWithComments()
     .then((dataObj) => {
       res.status(dataObj.statusCode).json({
         status: true,
