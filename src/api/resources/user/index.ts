@@ -23,7 +23,7 @@ const user = ({ router, path = '/users' }: RouteOptions) => {
   router.post(`${path}/:id/posts`, auth, validate(createUserPostSchema), createUserPostController);
   router.get(`${path}/:id/posts`, auth, retrieveUserPostsController);
 
-  router.get(`${path}/top-users`, retrieveTopUsersWithCommentsController);
+  router.get(`${path}/top`, retrieveTopUsersWithCommentsController);
 };
 
 export default user;
