@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CONFILCT = exports.SERVICE_UNAVAILABLE = exports.BAD_GATEWAY = exports.NOT_IMPLEMENTED = exports.INTERNAL_SERVER_ERROR = exports.BAD_REQUEST = exports.UN_AUTHORIZED = exports.NOT_FOUND = exports.FORBIDDEN = exports.RE_DIRECT = exports.MOVED_PERMANENTLY = exports.NO_CONTENT = exports.ACCEPTED = exports.CREATED = exports.OK = void 0;
+exports.OK = 200;
+exports.CREATED = 201;
+exports.ACCEPTED = 202;
+exports.NO_CONTENT = 204;
+exports.MOVED_PERMANENTLY = 301;
+exports.RE_DIRECT = 302;
+exports.FORBIDDEN = 403;
+exports.NOT_FOUND = 404;
+exports.UN_AUTHORIZED = 401;
+exports.BAD_REQUEST = 400;
+exports.INTERNAL_SERVER_ERROR = 500;
+exports.NOT_IMPLEMENTED = 501;
+exports.BAD_GATEWAY = 502;
+exports.SERVICE_UNAVAILABLE = 503;
+exports.CONFILCT = 409;
