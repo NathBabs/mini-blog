@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String    @id @default(uuid())
+  email    String    @unique
+  name     String
+  password String
+  tokens   String[]
+  posts    Post[]
+  comments Comment[]
+
+  deletedAt DateTime? @map("deleted_at")
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp()
+  updatedAt DateTime? @updatedAt @map("updated_at") @db.Timestamp()
+
+  @@index([id])
+  @@index([email])
+  @@map("users")
+}
+
+model Post {
+  id       String    @id @default(uuid())
+  title    String    @db.VarChar(50)
+  content  String    @db.VarChar(1000)
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comments Comment[]
+
+  userId String
+
+  deletedAt DateTime? @map("deleted_at")
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp()
+  updatedAt DateTime? @updatedAt @map("updated_at") @db.Timestamp()
+
+  @@index([id])
+  @@index([title])
+  @@map("posts")
+}
+
+model Comment {
+  id      String @id @default(uuid())
+  content String @db.VarChar(300)
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post    Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  userId String
+  postId String
+
+  deletedAt DateTime? @map("deleted_at")
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp()
+  updatedAt DateTime? @updatedAt @map("updated_at") @db.Timestamp()
+
+  @@index([id])
+  @@map("comments")
+}
